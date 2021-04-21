@@ -1,0 +1,67 @@
+﻿@model IEnumerable<IdentityRole>
+
+@using Microsoft.AspNetCore.Authorization
+
+@inject IAuthorizationService authorizationService
+
+@{
+    ViewBag.Title = "Tüm Roller";
+}
+
+<h2>Tüm Roller</h2>
+
+@if (Model.Any())
+{
+    <a class="btn btn-primary"
+       asp-action="RolOlustur" asp-controller="Administration">Rol Oluştur</a>
+    foreach (var role in Model)
+    {
+        <div class="card mb-3">
+            <div class="card-header">
+                Rol id: @role.Id
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">@role.Name</h5>
+            </div>
+            <div class="card-footer">
+                <form asp-action="SilRol" asp-route-id="@role.Id" method="post">
+                    @if ((await authorizationService.AuthorizeAsync(User, "RolDuzenlePolicy")).Succeeded)
+                    {
+                        <a asp-action="RolDuzenle" asp-controller="Administration"
+                           asp-route-id="@role.Id" class="btn btn-primary">Düzenle</a>
+                    }
+                    <span id="confirmDeleteSpan_@role.Id" style="display:none">
+                        <span>Silmek istediğine emin misin?</span>
+                        <button type="submit" class="btn btn-danger">Evet</button>
+                        <a href="#" class="btn btn-primary"
+                           onclick="confirmDelete('@role.Id', false)">Hayır</a>
+                    </span>
+
+                    <span id="deleteSpan_@role.Id">
+                        <a href="#" class="btn btn-primary"
+                           onclick="confirmDelete('@role.Id', true)">Sil</a>
+                    </span>
+                </form>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div class="card">
+        <div class="card-header">
+            Rol Oluştur
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">
+                Butonu kullanarak rol oluşturabilirsin.
+            </h5>
+            <a class="btn btn-primary"
+               asp-action="RolOlustur" asp-controller="Administration">Rol Oluştur</a>
+        </div>
+    </div>
+}
+
+@section Scripts{ 
+    <script src="~/js/site.js"></script>
+}

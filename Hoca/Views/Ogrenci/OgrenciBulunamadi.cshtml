@@ -1,0 +1,15 @@
+﻿@model int
+
+@{ 
+    ViewBag.Title = "404 Hatası";
+} 
+
+<div class="alert alert-danger mt-1 mb-1">
+    <h4>404 Sayfa Bulunamadı Hatası:</h4>
+    <hr />
+    <h5>@Model numaralı öğrencinin sayfası bulunamadı.</h5>
+</div>
+
+<a asp-action="Index" asp-controller="Ogrenci" class="btn btn-outline-success">
+    Ana sayfaya dönmek için tıklayınız.
+</a>

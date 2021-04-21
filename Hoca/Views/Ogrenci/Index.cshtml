@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Ogrenci>
+@{
+    ViewBag.Title = "Ogrenci Listesi";
+}
+<div class="card-deck">
+    @foreach(var ogr in Model)
+    {
+        var photoPath = "~/Images/" + (ogr.FotoPath ?? "kisi.png");
+        <div class="col-sm-3" style="min-width: 18rem; max-width: 30.5%;">
+            <div class="card-footer text-center">
+                <p>Ad: @ogr.Ad</p>
+                <p>Mail: @ogr.Email</p>
+                <p>Sınıf: @ogr.Sinif</p>
+            </div>
+            <img class="card-img-top imageDuzenleme" src="@photoPath" asp-append-version="true"/>
+            <a asp-controller="Ogrenci" asp-action="Ogrenciler" 
+               asp-route-id="@ogr.EncryptedId" class="btn btn-primary m-1">Detay</a>
+            <a asp-controller="Ogrenci" asp-action="Duzenle" 
+               asp-route-id="@ogr.Id" class="btn btn-primary m-1">Düzenle</a>
+        </div>
+    }
+</div>

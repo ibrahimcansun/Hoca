@@ -1,0 +1,22 @@
+﻿@model Sorular
+
+@{ 
+    ViewBag.Title = "Sorduklarım";
+}
+
+<h3>Sorduğum Sorular</h3>
+
+<table>
+    <tr>
+        <td>Soru Başlığı</td>
+        <td>Soru</td>
+        <td>Ders</td>
+        <td>Ad</td>
+    </tr>
+    <tr>
+        <td>@Model.SoruBaslik</td>
+        <td>@Model.SoruIcerik</td>
+        <td>@Model.SoruKategori</td>
+        <td>@Model.OgrenciAd</td>
+    </tr>
+</table>

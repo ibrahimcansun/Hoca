@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Sorular>
+@{
+    ViewBag.Title = "Soru Listesi";
+}
+<div class="card-deck">
+    @foreach(var soru in Model)
+    {
+        <div class="col-sm-6" style="min-width: 18rem; max-width: 30.5%;">
+            <div class="card-footer text-center">
+                <p>Ders: @soru.SoruKategori</p>
+                <p>Başlık: @soru.SoruBaslik</p>
+                <p>Soru: @soru.SoruIcerik</p>
+                <p>Soran: @soru.OgrenciAd </p>
+            </div>
+            <a asp-controller="Sorular" asp-action="Sorular"
+               asp-route-id="@soru.SoruID" class="btn btn-primary m-1">Detay</a>
+            <a asp-controller="Sorular" asp-action="Duzenle"
+               asp-route-id="@soru.SoruID" class="btn btn-primary m-1">Düzenle</a>
+            <a asp-controller="Sorular" asp-action="Cevapla"
+               asp-route-id="@soru.SoruID" class="btn btn-primary m-1">Cevapla</a>
+        </div>
+    }
+</div>

@@ -1,0 +1,63 @@
+﻿@model OgrenciOlusturViewModel
+@{ 
+    ViewBag.Title = "Ogrenci Olustur";
+}
+<form enctype="multipart/form-data" asp-controller="Ogrenci" asp-action="Olustur" method="post">
+    <div class="form-group row">
+        <label asp-for="Ad" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Ad" class="form-control" placeholder="Ad" />
+            <span asp-validation-for="Ad" class="text-danger"></span>
+        </div>
+        <label asp-for="Soyad" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Soyad" class="form-control" placeholder="Soyad" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Email" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Email" class="form-control" placeholder="Email" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <label asp-for="Sifre" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Sifre" class="form-control" placeholder="Sifre" type="password" />
+            <span asp-validation-for="Sifre" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Sinif" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <select asp-for="Sinif" asp-items="Html.GetEnumSelectList<Siniflar>()">
+                <option value="">Lütfen seçim yapın</option>
+            </select>
+            <span asp-validation-for="Sinif" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Foto" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <div class="custom-file">
+                <!--multiple--><input asp-for="Foto" class="form-control custom-file-input" />
+                <label class="custom-file-label">Fotoğraf Seç</label>
+            </div>
+        </div>
+    </div>
+    <div asp-validation-summary="All"></div>
+    <div class="form-group row">
+        <div class="col-sm-10">
+            <button type="submit">Oluştur</button>
+        </div>
+    </div>
+    @section Scripts {
+        <script>
+            $(document).ready(function () {
+                $('.custom-file-input').on("change", function () {
+                    var fileName = $(this).val().split("\\").pop();
+                    $(this).next('.custom-file-label').html(fileName);
+                });
+            });
+        </script>
+    } 
+</form>

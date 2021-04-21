@@ -1,0 +1,15 @@
+﻿@if (ViewBag.ErrorTitle == null)
+{
+    ViewBag.Title = "Bulunamadı";
+
+    <h5>Hatanın düzeltilmesiyle alakalı destek almak için hocam@hoca.com mail adresine mail atabilirsiniz.</h5>
+    <hr />
+    <p>
+        <a asp-action="Index" asp-controller="Ogrenci">Ana sayfaya dönmek için lütfen tıklayınız.</a>
+    </p>
+}
+else
+{
+    <h1 class="text-danger">@ViewBag.ErrorTitle</h1>
+    <h6 class="text-danger">@ViewBag.Error</h6>
+}

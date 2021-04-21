@@ -1,0 +1,59 @@
+﻿@model IEnumerable<OgrenciUser>
+
+@{
+    ViewBag.Title = "Kullanıcılar";
+}
+
+<h1>Tüm Kullanıcılar</h1>
+
+@if (Model.Any())
+{
+    <a asp-action="KayitOl" asp-controller="Hesap" class="btn btn-primary mb-2">Kullanıcı Ekle</a>
+
+
+    foreach (var user in Model)
+    {
+        <div class="card mb-3">
+            <div class="card-header">
+                Kullanıcı id: @user.Id
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">@user.UserName</h5>
+                <h5 class="card-title">@user.Email</h5>
+            </div>
+            <div class="card-footer">
+                <form asp-action="SilKullanici" asp-route-id="@user.Id" method="post">
+                    <a asp-action="DuzenleKullanici" asp-controller="Administration"
+                       asp-route-id="@user.Id" class="btn btn-primary">Düzenle</a>
+                    <span id="confirmDeleteSpan_@user.Id" style="display:none">
+                        <span>Silmek istediğine emin misin?</span>
+                        <button type="submit" class="btn btn-danger">Evet</button>
+                        <a href="#" class="btn btn-primary"
+                           onclick="confirmDelete('@user.Id', false)">Hayır</a>
+                    </span>
+
+                    <span id="deleteSpan_@user.Id">
+                        <a href="#" class="btn btn-primary"
+                           onclick="confirmDelete('@user.Id', true)">Sil</a>
+                    </span>
+                </form>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div class="card">
+        <div class="card-header">
+            Veri tabanında kullanıcı bulunmamaktadır.
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">El ile kullanıcı oluşturmak için butona basın.</h5>
+            <a class="btn btn-primary" asp-controller="Hesap" asp-action="KayitOl"></a>
+        </div>
+    </div>
+}
+
+@section Scripts{
+    <script src="~/js/site.js"></script>
+}

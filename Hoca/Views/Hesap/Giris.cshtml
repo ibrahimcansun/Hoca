@@ -1,0 +1,71 @@
+﻿@model LoginViewModel
+
+@{ 
+    ViewBag.Title = "Giriş";
+} 
+
+
+
+<div class="row">
+    <div class="col-md-8">
+        <h2>Öğrenci Giriş</h2>
+        <form method="post">
+            <div asp-validation-summary="All"></div>
+            <div class="form-group">
+                <label asp-for="Ad"></label>
+                <input asp-for="Ad" class="form-control" />
+                <span asp-validation-for="Ad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="custom-checkbox">
+                    <label asp-for="BeniHatirla">
+                        <input asp-for="BeniHatirla" />
+                        @Html.DisplayNameFor(m => m.BeniHatirla)
+                    </label>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Giriş Yap</button>
+            <div>
+                <a asp-action="ParolamiUnuttum">Parolamı unuttum</a>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-md-4">
+        <h3>Sosyal Medya</h3>
+        <hr />
+        @{ 
+            if (Model.ExternalLogins.Count == 0)
+            {
+                <div>Konfigurasyon yapılmadı.</div>
+            }
+            else
+            {
+                <form method="post" asp-action="ExternalLogin" asp-route-url="@Model.ReturnUrl">
+                    <div>
+                        @foreach (var provider in Model.ExternalLogins)
+                        {
+                            <button type="submit" class="btn btn-primary"
+                                    name="provider" value="@provider.Name"
+                                    title="@provider.DisplayName hesabını kullan">
+                                @provider.DisplayName
+                            </button>
+                        }
+                    </div>
+                </form>
+            }
+
+        }
+
+    </div>
+</div>

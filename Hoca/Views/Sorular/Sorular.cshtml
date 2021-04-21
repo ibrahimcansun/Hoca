@@ -1,0 +1,23 @@
+﻿@model SorularSorularViewModel
+@{
+    ViewBag.Title = "Soru";
+}
+<h3>@Model.PageTitle</h3>
+
+<div>
+    Ders: @Model.Sorular.SoruKategori
+</div>
+<div>
+    Başlık: @Model.Sorular.SoruBaslik
+</div>
+<div>
+    Soru: @Model.Sorular.SoruIcerik
+</div>
+<div>
+    Tarih: @Model.Sorular.Tarih
+</div>
+<a asp-controller="Sorular" asp-action="Duzenle" asp-route-id="@Model.Sorular.SoruID"
+   class="btn btn-primary m-1">Soruyu Düzenle</a>
+@section Scripts {
+    <script src="~/js/site.js"></script>
+}

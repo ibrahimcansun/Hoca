@@ -1,0 +1,33 @@
+﻿@model HomeOgrencilerViewModel
+@{
+    ViewBag.Title = "Öğrencinin Kendi Sayfası";
+    var photoPath = "~/Images/" + (Model.Ogrenci.FotoPath ?? "kisi.png");
+}
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <h3>@Model.PageTitle</h3>
+
+    <div>
+        Ad: @Model.Ogrenci.Ad
+    </div>
+    <div>
+        Soyad: @Model.Ogrenci.Soyad
+    </div>
+    <div>
+        Mail: @Model.Ogrenci.Email
+    </div>
+    <div>
+        Sınıf: @Model.Ogrenci.Sinif
+    </div>
+    <img class="card-img-top imageDuzenleme" src="@photoPath" asp-append-version="true" />
+    <a asp-controller="Ogrenci" asp-action="Duzenle" asp-route-id="@Model.Ogrenci.Id" 
+       class="btn btn-primary m-1">Profili Düzenle</a>
+    @section Scripts {
+        <script src="~/js/site.js"></script>
+    }
+</body>
+</html>
